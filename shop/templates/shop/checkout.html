@@ -1,0 +1,92 @@
+{% extends 'shop/base.html' %} {% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group" id="item-list">
+            <h3>Voici votre liste </h3>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <deiv class="col-md-12">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="items" name="items">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputYText4">Nom</label>
+                    <input type="text" name="nom" class="form-control" id="nom" placeholder="Lamat">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="lamt032025@gmail.com">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Addresse</label>
+                <input type="text" name="adresse" class="form-control" id="adresse" placeholder="Arafart,Noukachoutt">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Ville</label>
+                    <input type="text" name="ville" class="form-control" id="ville" placeholder="Nouakchoutt">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">Pays </label>
+                    <select id="pays" name="pays" class="form-control">
+                  <option selected>Mauritanie...</option>
+                  <option>Algerie</option>
+                  <option>France</option>
+                  <option>USA</option>
+                  <option>Angola</option>
+                  <option>UAE</option>
+                  <option>Belgique</option>
+                </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input name="zipcode" type="text" class="form-control" id="zipcode">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Somme total a payer</label>
+                    <input name="total" type="readonly" class="bg-dark text-warning form-control" id="total">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Commander</button>
+        </form>
+</div>
+</div>{% endblock %} {% block js %}
+<script type="text/javascript">
+    if (localStorage.getItem('panier') == null) {
+        var panier = {};
+    } else {
+        panier = JSON.parse(localStorage.getItem('panier'));
+    }
+    var total = 0;
+    var nombre = 0;
+    for (item in panier) {
+        let nom = panier[item][1];
+        let quanitite = panier[item][0];
+        let prix = panier[item][2];
+        nombre += quanitite;
+        total += prix;
+        let itemString = `<li class="list-group-item d-flex justify-content-between align-items-center">
+              ${nom}
+              <span class="badge badge-primary badge-pill"> QTE ${quanitite}</span>
+              <span class="badge badge-warning badge-pill"> UM ${prix}</span>
+               </li>`;
+        $('#item-list').append(itemString);
+    }
+    let itemNombre = `<li class="list-group-item d-flex justify-content-between align-items-center">
+        <b class="bg-danger">PRIX ET QUANTITE TOTAL:</b>
+        <span class="badge badge-danger badge-pill"> QTE ${nombre}</span>
+        Total:<span class="badge badge-danger badge-pill"> UM  ${total}</span>
+         </li>`;
+    $('#item-list').append(itemNombre);
+    $('#total').val("UM " + total);
+    $('#items').val(JSON.stringify(panier));
+</script>
+<div>
+
+</div> {% endblock %}
