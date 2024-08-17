@@ -1,0 +1,2 @@
+postgresql://postgres:aHkCbKyKNZpezRTYdGIizHSWWTEZVfwv@postgres.railway.internal:5432/railway
+postgresql://postgres:aHkCbKyKNZpezRTYdGIizHSWWTEZVfwv@autorack.proxy.rlwy.net:57879/railway

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import *
-admin.site.site_header = "RIM-SHOP"
-admin.site.site_title = "RIM-SHOP"
+admin.site.site_header = "MOURADI-SHOP"
+admin.site.site_title = "MOURADI-SHOP"
 admin.site.index_title = "Manageur"
 # Register your models here.
 class AdminCategorie(admin.ModelAdmin):
